@@ -25,13 +25,18 @@ def split_numbers(numbers):
 def calculate_sum(number_list):
     total = 0
     negatives = []
-    
+
     for number in number_list:
-        num = int(number)  # Convert to integer
-        if num < 0:
-            negatives.append(num)
-        total += num
-    
+        if number:  # Check if number is not an empty string
+            try:
+                num = int(number)  # Convert to integer
+            except ValueError:
+                raise ValueError(f"Invalid input: {number}")  # Raise error for non-integer input
+
+            if num < 0:
+                negatives.append(num)
+            total += num
+
     if negatives:
         raise ValueError(f"negative numbers not allowed: {', '.join(map(str, negatives))}")
     
